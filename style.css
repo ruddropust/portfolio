@@ -1,0 +1,781 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600&display=swap');
+
+:root{
+    --yellow:#f9ca24;
+}
+
+*{
+    font-family:'Nunito', sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    text-decoration:none;
+    outline:none;
+    border:none;
+    text-transform:capitalize;
+    transition:all .2s linear;
+}
+
+*::selection{
+    background:var(--yellow);
+    color:#333;
+}
+
+html{
+    font-size:62.5%;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+}
+
+html::-webkit-scrollbar{
+    width:1rem;
+}
+
+html::-webkit-scrollbar-track{
+    background:#222;
+}
+
+html::-webkit-scrollbar-thumb{
+    background:var(--yellow);
+}
+
+body{
+    background:#111;
+    color:#fff;
+    overflow-x:hidden;
+    padding-left:35rem;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+section{
+    min-height:100vh;
+    padding:3rem 5%;
+}
+
+.btn{
+    padding:.9rem 2.8rem;
+    background:#333;
+    color:#fff;
+    cursor:pointer;
+    margin-top:1rem;
+    font-size:2rem;
+    border-radius:5rem;
+    display:inline-block;
+}
+
+.btn a{
+    color:#fff;
+}
+
+.btn a i{
+    padding:0 .5rem;
+    font-size:1.8rem;
+}
+
+.btn:hover{
+    background:var(--yellow);
+    color:#111;
+}
+
+.heading{
+    text-align:center;
+    margin:0 auto 3rem;
+    max-width:100rem;
+    font-size:4rem;
+    padding:1rem;
+    border-bottom:.1rem solid #fff4;
+    color:#fff;
+}
+
+.heading span{
+    color:var(--yellow);
+}
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+    height:100%;
+    width:35rem;
+    background:#1a1a1a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-flow:column;
+    text-align:center;
+    padding:2rem;
+}
+
+header .user img{
+    height:17rem;
+    width:17rem;
+    border-radius:50%;
+    object-fit:cover;
+    margin:0 auto 1rem;
+    border:.7rem solid var(--yellow);
+}
+
+header .user .name{
+    font-size:3.5rem;
+    color:#fff;
+}
+
+header .user .post{
+    font-size:2rem;
+    color:#eee;
+}
+
+header .navbar{
+    width:100%;
+}
+
+header .navbar ul{
+    list-style:none;
+    padding:1rem 2rem;
+}
+
+header .navbar ul li a{
+    display:block;
+    padding:1rem;
+    margin:1.2rem 0;
+    background:#333;
+    color:#fff;
+    font-size:2rem;
+    border-radius:5rem;
+}
+
+header .navbar ul li a:hover{
+    background:var(--yellow);
+    color:#111;
+}
+.bio_info{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:1.5rem;
+    padding:1rem 0;
+    text-align: justify;
+}
+#menu{
+    position:fixed;
+    top:2rem;
+    right:2rem;
+    background:#333;
+    color:#fff;
+    cursor:pointer;
+    font-size:2.5rem;
+    padding:1rem 1.5rem;
+    z-index:1100;
+    display:none;
+    border-radius:.6rem;
+}
+
+.home{
+    display:flex;
+    justify-content:center;
+    flex-flow:column;
+    padding:0 8%;
+}
+
+.home h3{
+    padding-top:12rem;
+    font-size:2.5rem;
+    color:#fff;
+}
+
+.home h1{
+    font-size:5rem;
+    color:#fff;
+    line-height:1.2;
+}
+
+.home h1 span{
+    color:var(--yellow);
+    animation:type 5s steps(16) infinite alternate;
+    overflow:hidden;
+    white-space:nowrap;
+    border-right:4px solid var(--yellow);
+    display:inline-flex;
+    max-width:100%;
+}
+
+@keyframes type{
+    from {
+        max-width:0;
+    }
+    to {
+        max-width:100%;
+    }
+}
+
+
+.home p{
+    font-size:2rem;
+    color:#eee;
+    padding:1rem 0;
+    line-height:1.7;
+    max-width:85rem;
+}
+
+.about .row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:2rem;
+    padding:1rem 0;
+}
+
+.about .row .info{
+    flex:1 1 40rem;
+    padding:2rem 1rem;
+}
+
+.about .row .info h3{
+    font-size:2rem;
+    color:var(--yellow);
+    padding:1rem 0;
+    font-weight:normal;
+}
+
+.about .row .info h3 span{
+    color:#eee;
+    padding:0 .5rem;
+}
+
+.about .row .counter{
+    flex:1 1 40rem;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:1.5rem;
+}
+
+.about .row .counter .box{
+    width:20rem;
+    max-width:100%;
+    background:#222;
+    text-align:center;
+    padding:2rem;
+    margin:0;
+    border-radius:1rem;
+}
+
+.about .row .counter .box span{
+    font-size:4rem;
+    color:var(--yellow);
+}
+
+.about .row .counter .box h3{
+    font-size:2rem;
+    color:#fff;
+}
+
+.education .box-container{
+    display:flex;
+    align-items:stretch;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:2rem;
+    padding:1rem 0;
+    padding-left:1rem;
+}
+
+.education .box-container .box{
+    flex:1 1 27rem;
+    width:27rem;
+    margin:2rem 1rem;
+    padding-left:4rem;
+    border-left:.2rem solid #fff;
+    position:relative;
+}
+
+.education .box-container .box span{
+    font-size:1.3rem;
+    background:#222;
+    color:#fff;
+    border-radius:5rem;
+    padding:.5rem 2.5rem;
+}
+
+.education .box-container .box h3{
+    font-size:2rem;
+    color:#fff;
+    padding-top:1.5rem;
+}
+
+.education .box-container .box p{
+    font-size:1.4rem;
+    color:#eee;
+    padding:1rem 0;
+    line-height:1.7;
+}
+
+.education .box-container .box i{
+    position:absolute;
+    top:-1.5rem;
+    left:-2.5rem;
+    height:5rem;
+    width:5rem;
+    border-radius:50%;
+    line-height:5rem;
+    text-align:center;
+    font-size:2rem;
+    color:#fff;
+    background:var(--yellow);
+}
+
+.portfolio .box-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(24rem, 1fr));
+    gap:2rem;
+    padding:2rem 0;
+}
+
+.portfolio .box-container .box{
+    height:20rem;
+    width:100%;
+    border-radius:1rem;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.portfolio .box-container .box img{
+    height:100%;
+    width:100%;
+    object-fit:cover;
+}
+
+.portfolio .box-container .box:hover img{
+    transform:scale(1.08);
+}
+
+.contact .row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:2rem;
+}
+
+.contact .row .content{
+    flex:1 1 30rem;
+    padding:2rem;
+}
+
+.contact .row form{
+    flex:1 1 45rem;
+    padding:2rem;
+    margin:0;
+}
+
+.contact .row form .box{
+    padding:1.5rem;
+    margin:1rem 0;
+    background:#3333;
+    color:#fff;
+    text-transform:none;
+    font-size:1.7rem;
+    width:100%;
+    border-radius:.6rem;
+}
+
+.contact .row form .box::placeholder{
+    text-transform:capitalize;
+}
+
+.contact .row form .message{
+    height:15rem;
+    resize:none;
+}
+
+.contact .row .content .title{
+    text-transform:uppercase;
+    color:#fff;
+    font-size:3rem;
+    padding-bottom:2rem;
+}
+
+.contact .row .content .info h3{
+    display:flex;
+    align-items:center;
+    font-size:2rem;
+    color:#eee;
+    padding:1rem 0;
+    font-weight:normal;
+    line-height:1.5;
+    word-break:break-word;
+}
+
+.contact .row .content .info h3 i{
+    padding-right:1rem;
+    color:var(--yellow);
+}
+
+.top{
+    position:fixed;
+    bottom:2rem;
+    right:2rem;
+    z-index:100;
+    display:none;
+}
+
+.progress-container{
+    width:100%;
+    height:6px;
+    background:#2b2b2b;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1200;
+}
+
+.progress-bar{
+    height:6px;
+    background:var(--yellow);
+    width:0%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1201;
+}
+
+/* skill */
+.skill-section{
+    padding:5rem 0 0;
+    margin:auto;
+    height:auto;
+    width:100%;
+}
+
+.skill{
+    text-align:center;
+    font-size:5rem;
+    font-weight:700;
+    color:rgba(255,255,255,0.8);
+    margin-bottom:2rem;
+}
+
+.skill-bars{
+    padding:2.5rem;
+    width:min(100%, 100rem);
+    margin:0 auto;
+    background:rgb(20, 19, 13);
+    box-shadow:0 1.5rem 4rem rgba(255, 0, 0, 0.12);
+    border-radius:1rem;
+}
+
+.skill-bars .bar{
+    margin:2rem 0;
+}
+
+.skill-bars .bar:first-child{
+    margin-top:0;
+}
+
+.skill-bars .bar .info{
+    margin-bottom:.8rem;
+}
+
+.skill-bars .bar .info span{
+    font-weight:500;
+    font-size:1.7rem;
+    opacity:0;
+    color:rgba(194, 194, 194, 0.8);
+    animation:showText 0.5s 1s linear forwards;
+}
+
+@keyframes showText{
+    100%{
+        opacity:1;
+    }
+}
+
+.skill-bars .bar .progress-line{
+    height:1rem;
+    width:100%;
+    background:#f0f0f0;
+    position:relative;
+    transform:scaleX(0);
+    transform-origin:left;
+    border-radius:1rem;
+    box-shadow:inset 0 1px 1px rgba(0,0,0,0.05), 0 1px rgba(255,255,255,0.8);
+    animation:animate 1s cubic-bezier(1,0,0.5,1) forwards;
+}
+
+@keyframes animate{
+    100%{
+        transform:scaleX(1);
+    }
+}
+
+.bar .progress-line span{
+    height:100%;
+    position:absolute;
+    border-radius:1rem;
+    transform:scaleX(0);
+    transform-origin:left;
+    background:#6665ee;
+    animation:animate 1s 1s cubic-bezier(1,0,0.5,1) forwards;
+}
+
+.bar .progress-line.html span{
+    width:95%;
+}
+
+.bar .progress-line.css span{
+    width:85%;
+}
+
+.bar .progress-line.jquery span{
+    width:95%;
+}
+
+.bar .progress-line.python span{
+    width:95%;
+}
+
+.bar .progress-line.mysql span{
+    width:90%;
+}
+.bar .progress-line.django span{
+    width:90%;
+}
+.bar .progress-line.devops span{
+    width:75%;
+}
+.progress-line span::before{
+    position:absolute;
+    content:"";
+    top:-10px;
+    right:0;
+    height:0;
+    width:0;
+    border:7px solid transparent;
+    border-bottom-width:0;
+    border-right-width:0;
+    border-top-color:#000;
+    opacity:0;
+    animation:showText2 0.5s 1.5s linear forwards;
+}
+
+.progress-line span::after{
+    position:absolute;
+    top:-28px;
+    right:0;
+    font-weight:500;
+    background:#000;
+    color:#fff;
+    padding:1px 8px;
+    font-size:12px;
+    border-radius:3px;
+    opacity:0;
+    animation:showText2 0.5s 1.5s linear forwards;
+}
+
+@keyframes showText2{
+    100%{
+        opacity:1;
+    }
+}
+
+.progress-line.html span::after{
+    content:"95%";
+}
+
+.progress-line.css span::after{
+    content:"85%";
+}
+
+.progress-line.jquery span::after{
+    content:"95%";
+}
+
+.progress-line.python span::after{
+    content:"95%";
+}
+
+.progress-line.mysql span::after{
+    content:"90%";
+}
+.progress-line.django span::after{
+    content:"90%";
+}
+.progress-line.devops span::after{
+    content:"75%";
+}
+
+/* media queries */
+@media (max-width:1200px){
+    html{
+        font-size:58%;
+    }
+
+    .home{
+        padding:0 6%;
+    }
+
+    .skill-bars{
+        width:100%;
+    }
+}
+
+@media (max-width:991px){
+    header{
+        left:-120%;
+    }
+
+    #menu{
+        display:block;
+    }
+
+    header.toggle{
+        left:0%;
+        width:32rem;
+    }
+
+    body{
+        padding:0;
+    }
+
+    .home{
+        padding:0 5%;
+    }
+
+    .home h3{
+        padding-top:10rem;
+    }
+
+    .skill-section{
+        padding-top:4rem;
+    }
+}
+
+@media (max-width:768px){
+    html{
+        font-size:53%;
+    }
+
+    section{
+        padding:2.5rem 4%;
+    }
+
+    .home h1{
+        font-size:4.2rem;
+    }
+
+    .heading{
+        font-size:3.4rem;
+    }
+
+    .about .row .info,
+    .about .row .counter,
+    .contact .row .content,
+    .contact .row form{
+        flex:1 1 100%;
+    }
+
+    .education .box-container .box{
+        flex:1 1 100%;
+        width:100%;
+        margin:2rem 0;
+    }
+
+    .skill{
+        font-size:4rem;
+    }
+
+    .skill-bars{
+        padding:2rem 1.5rem;
+    }
+}
+
+@media (max-width:520px){
+    html{
+        font-size:50%;
+    }
+
+    #menu{
+        top:1.5rem;
+        right:1.5rem;
+    }
+
+    header{
+        width:100vw;
+    }
+
+    header.toggle{
+        width:100vw;
+    }
+
+    .heading{
+        margin:0 auto 2.5rem;
+        font-size:3rem;
+    }
+
+    .home{
+        padding:0 4%;
+    }
+
+    .home h1{
+        font-size:3.6rem;
+    }
+
+    .home h1 span{
+        white-space:normal;
+        border-right:none;
+        animation:none;
+        display:inline;
+    }
+
+    .home p{
+        font-size:1.8rem;
+    }
+
+    .about .row .counter{
+        gap:1rem;
+    }
+
+    .about .row .counter .box{
+        width:100%;
+    }
+
+    .portfolio .box-container{
+        grid-template-columns:1fr;
+    }
+
+    .contact .row form{
+        padding:1rem 0;
+    }
+
+    .skill{
+        font-size:3.4rem;
+    }
+
+    .progress-line span::before,
+    .progress-line span::after{
+        display:none;
+    }
+}
+
+@media (max-width:360px){
+    html{
+        font-size:46%;
+    }
+
+    .btn{
+        width:100%;
+        text-align:center;
+    }
+
+    header .user img{
+        width:14rem;
+        height:14rem;
+    }
+}
