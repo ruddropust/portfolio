@@ -153,6 +153,7 @@ header .navbar ul li a:hover{
     background:var(--yellow);
     color:#111;
 }
+
 .bio_info{
     display:flex;
     align-items:center;
@@ -160,8 +161,9 @@ header .navbar ul li a:hover{
     flex-wrap:wrap;
     gap:1.5rem;
     padding:1rem 0;
-    text-align: justify;
+    text-align:justify;
 }
+
 #menu{
     position:fixed;
     top:2rem;
@@ -206,14 +208,13 @@ header .navbar ul li a:hover{
 }
 
 @keyframes type{
-    from {
+    from{
         max-width:0;
     }
-    to {
+    to{
         max-width:100%;
     }
 }
-
 
 .home p{
     font-size:2rem;
@@ -260,22 +261,61 @@ header .navbar ul li a:hover{
 .about .row .counter .box{
     width:20rem;
     max-width:100%;
-    background:#222;
+    background:#1a1a1a;
+    border:.1rem solid #ffffff1a;
     text-align:center;
-    padding:2rem;
+    padding:2.5rem 2rem;
     margin:0;
-    border-radius:1rem;
+    border-radius:.6rem;
+    position:relative;
+    overflow:hidden;
+    cursor:default;
+    transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+    animation:expFadeUp .6s ease both;
+}
+
+.about .row .counter .box:nth-child(1){ animation-delay:.1s; }
+.about .row .counter .box:nth-child(2){ animation-delay:.2s; }
+.about .row .counter .box:nth-child(3){ animation-delay:.3s; }
+.about .row .counter .box:nth-child(4){ animation-delay:.4s; }
+
+.about .row .counter .box::after{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:.3rem;
+    height:0;
+    background:var(--yellow);
+    transition:height .4s ease;
+}
+
+.about .row .counter .box:hover{
+    border-color:var(--yellow);
+    transform:translateY(-.5rem);
+    box-shadow:0 1rem 3rem rgba(249, 202, 36, 0.08);
+}
+
+.about .row .counter .box:hover::after{
+    height:100%;
 }
 
 .about .row .counter .box span{
     font-size:4rem;
     color:var(--yellow);
+    display:block;
 }
 
 .about .row .counter .box h3{
-    font-size:2rem;
-    color:#fff;
+    font-size:1.8rem;
+    color:#aaa;
+    font-weight:300;
+    margin-top:.5rem;
 }
+
+/* ============================================
+   EDUCATION SECTION — SCROLL ANIMATIONS
+   ============================================ */
 
 .education .box-container{
     display:flex;
@@ -287,21 +327,85 @@ header .navbar ul li a:hover{
     padding-left:1rem;
 }
 
+/* Base state: hidden before scroll triggers */
 .education .box-container .box{
     flex:1 1 27rem;
     width:27rem;
     margin:2rem 1rem;
     padding-left:4rem;
-    border-left:.2rem solid #fff;
+    border-left:.2rem solid #fff2;
     position:relative;
+
+    /* animation defaults */
+    opacity:0;
+    transform:translateX(-4rem);
+    transition:
+        opacity .6s ease,
+        transform .6s ease,
+        border-color .3s ease;
 }
 
+/* Odd boxes slide from left, even from right */
+.education .box-container .box:nth-child(even){
+    transform:translateX(4rem);
+}
+
+/* Revealed state (class added by JS) */
+.education .box-container .box.edu-visible{
+    opacity:1;
+    transform:translateX(0);
+    border-left-color:var(--yellow);
+}
+
+/* stagger delays */
+.education .box-container .box:nth-child(1){ transition-delay:.0s; }
+.education .box-container .box:nth-child(2){ transition-delay:.1s; }
+.education .box-container .box:nth-child(3){ transition-delay:.2s; }
+.education .box-container .box:nth-child(4){ transition-delay:.3s; }
+.education .box-container .box:nth-child(5){ transition-delay:.4s; }
+.education .box-container .box:nth-child(6){ transition-delay:.5s; }
+.education .box-container .box:nth-child(7){ transition-delay:.6s; }
+
+/* Icon bounce-in when revealed */
+.education .box-container .box i{
+    position:absolute;
+    top:-1.5rem;
+    left:-2.5rem;
+    height:5rem;
+    width:5rem;
+    border-radius:50%;
+    line-height:5rem;
+    text-align:center;
+    font-size:2rem;
+    color:#fff;
+    background:var(--yellow);
+
+    /* start small */
+    transform:scale(0) rotate(-30deg);
+    transition:transform .5s cubic-bezier(.34,1.56,.64,1);
+    transition-delay: inherit;
+}
+
+.education .box-container .box.edu-visible i{
+    transform:scale(1) rotate(0deg);
+}
+
+/* Year badge pulse on reveal */
 .education .box-container .box span{
     font-size:1.3rem;
     background:#222;
     color:#fff;
     border-radius:5rem;
     padding:.5rem 2.5rem;
+    display:inline-block;
+    transition:background .4s ease, color .4s ease, box-shadow .4s ease;
+    transition-delay: inherit;
+}
+
+.education .box-container .box.edu-visible span{
+    background:rgba(249,202,36,.12);
+    color:var(--yellow);
+    box-shadow:0 0 0 .1rem rgba(249,202,36,.3);
 }
 
 .education .box-container .box h3{
@@ -317,44 +421,424 @@ header .navbar ul li a:hover{
     line-height:1.7;
 }
 
-.education .box-container .box i{
-    position:absolute;
-    top:-1.5rem;
-    left:-2.5rem;
-    height:5rem;
-    width:5rem;
-    border-radius:50%;
-    line-height:5rem;
-    text-align:center;
-    font-size:2rem;
-    color:#fff;
-    background:var(--yellow);
+/* Hover lift effect */
+.education .box-container .box.edu-visible:hover{
+    transform:translateY(-.4rem) translateX(0);
+    border-left-color:#fff;
 }
+
+/* ============================================
+   SKILLS SECTION — SCROLL ANIMATIONS
+   ============================================ */
+
+.skill-section{
+    padding:5rem 0 0;
+    margin:auto;
+    height:auto;
+    width:100%;
+}
+
+.skill{
+    text-align:center;
+    font-size:5rem;
+    font-weight:700;
+    color:rgba(255,255,255,0.8);
+    margin-bottom:2rem;
+
+    /* heading fade-in */
+    opacity:0;
+    transform:translateY(2rem);
+    transition:opacity .6s ease, transform .6s ease;
+}
+
+.skill.skill-heading-visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.skill-bars{
+    padding:2.5rem;
+    width:min(100%, 100rem);
+    margin:0 auto;
+    background:rgb(20, 19, 13);
+    box-shadow:0 1.5rem 4rem rgba(255, 0, 0, 0.12);
+    border-radius:1rem;
+}
+
+.skill-bars .bar{
+    margin:2rem 0;
+    /* each bar slides up */
+    opacity:0;
+    transform:translateY(1.5rem);
+    transition:opacity .5s ease, transform .5s ease;
+}
+
+.skill-bars .bar.bar-visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* stagger each bar */
+.skill-bars .bar:nth-child(2){ transition-delay:.1s; }
+.skill-bars .bar:nth-child(3){ transition-delay:.2s; }
+.skill-bars .bar:nth-child(4){ transition-delay:.3s; }
+.skill-bars .bar:nth-child(5){ transition-delay:.4s; }
+.skill-bars .bar:nth-child(6){ transition-delay:.5s; }
+.skill-bars .bar:nth-child(7){ transition-delay:.6s; }
+
+.skill-bars .bar:first-child{
+    margin-top:0;
+}
+
+.skill-bars .bar .info{
+    margin-bottom:.8rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.skill-bars .bar .info span{
+    font-weight:500;
+    font-size:1.7rem;
+    color:rgba(194, 194, 194, 0.8);
+    opacity:0;
+    transition:opacity .4s ease .3s;
+}
+
+.skill-bars .bar.bar-visible .info span{
+    opacity:1;
+}
+
+/* Percentage label on the right */
+.skill-bars .bar .info .pct-label{
+    font-size:1.4rem;
+    color:var(--yellow);
+    font-weight:600;
+    opacity:0;
+    transition:opacity .4s ease .6s;
+}
+
+.skill-bars .bar.bar-visible .info .pct-label{
+    opacity:1;
+}
+
+.skill-bars .bar .progress-line{
+    height:1rem;
+    width:100%;
+    background:#2a2a2a;
+    position:relative;
+    border-radius:1rem;
+    overflow:hidden;
+}
+
+/* The coloured fill — starts at 0, JS sets width when in view */
+.bar .progress-line span{
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    border-radius:1rem;
+    background:linear-gradient(90deg, #6665ee, #a78bfa);
+    width:0%;                          /* JS will animate to final value */
+    transition:width 1.2s cubic-bezier(.4,0,.2,1);
+}
+
+/* Shimmer overlay */
+.bar .progress-line span::before{
+    content:'';
+    position:absolute;
+    top:0; left:-100%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+    animation:shimmer 2.2s infinite;
+    border-radius:1rem;
+}
+
+@keyframes shimmer{
+    0%   { left:-60%; }
+    100% { left:110%; }
+}
+
+/* Remove the old tooltip arrows/badges — replaced by .pct-label */
+.progress-line span::after{
+    display:none;
+}
+
+/* ============================================
+   EXPERIENCE & WORKS SECTION
+   ============================================ */
+
+.exp .box-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(30rem, 1fr));
+    gap:2rem;
+    padding:1rem 0;
+}
+
+.exp .box-container .box{
+    background:#1a1a1a;
+    border:.1rem solid #ffffff1a;
+    border-radius:.6rem;
+    padding:3rem 2.5rem;
+    position:relative;
+    overflow:hidden;
+    transition:border-color .3s ease, transform .3s ease;
+}
+
+.exp .box-container .box::after{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:.3rem;
+    height:0;
+    background:var(--yellow);
+    transition:height .4s ease;
+}
+
+.exp .box-container .box:hover{
+    border-color:var(--yellow);
+    transform:translateY(-.5rem);
+    box-shadow:0 1rem 3rem rgba(249, 202, 36, 0.08);
+}
+
+.exp .box-container .box:hover::after{
+    height:100%;
+}
+
+.exp .box-container .box .fas{
+    font-size:2.2rem;
+    color:var(--yellow);
+    margin-bottom:1.2rem;
+    display:block;
+}
+
+.exp .box-container .box span{
+    display:inline-block;
+    font-size:1.2rem;
+    font-weight:600;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--yellow);
+    background:rgba(249, 202, 36, 0.08);
+    border:.1rem solid rgba(249, 202, 36, 0.25);
+    padding:.4rem 1.2rem;
+    border-radius:5rem;
+    margin-bottom:1.5rem;
+}
+
+.exp .box-container .box h3{
+    font-size:1.9rem;
+    color:#fff;
+    line-height:1.4;
+    margin-bottom:1.2rem;
+    font-weight:600;
+}
+
+.exp .box-container .box p{
+    font-size:1.5rem;
+    line-height:1.8;
+    color:#aaa;
+    font-weight:300;
+}
+
+.exp .box-container .box{
+    animation:expFadeUp .6s ease both;
+}
+
+.exp .box-container .box:nth-child(1){ animation-delay:.1s; }
+.exp .box-container .box:nth-child(2){ animation-delay:.25s; }
+.exp .box-container .box:nth-child(3){ animation-delay:.4s; }
+
+@keyframes expFadeUp{
+    from{
+        opacity:0;
+        transform:translateY(2.5rem);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ============================================
+   PORTFOLIO / TRAINING & CERTIFICATIONS
+   ============================================ */
 
 .portfolio .box-container{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(24rem, 1fr));
+    grid-template-columns:repeat(auto-fit, minmax(28rem, 1fr));
     gap:2rem;
     padding:2rem 0;
 }
 
 .portfolio .box-container .box{
-    height:20rem;
-    width:100%;
-    border-radius:1rem;
+    background:#1a1a1a;
+    border:.1rem solid #ffffff1a;
+    border-radius:.6rem;
     overflow:hidden;
+    position:relative;
     cursor:pointer;
+    transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+    animation:expFadeUp .6s ease both;
+}
+
+.portfolio .box-container .box:nth-child(1){ animation-delay:.1s; }
+.portfolio .box-container .box:nth-child(2){ animation-delay:.2s; }
+.portfolio .box-container .box:nth-child(3){ animation-delay:.3s; }
+.portfolio .box-container .box:nth-child(4){ animation-delay:.4s; }
+.portfolio .box-container .box:nth-child(5){ animation-delay:.5s; }
+.portfolio .box-container .box:nth-child(6){ animation-delay:.6s; }
+
+.portfolio .box-container .box:hover{
+    border-color:var(--yellow);
+    transform:translateY(-.5rem);
+    box-shadow:0 1rem 3rem rgba(249, 202, 36, 0.12);
 }
 
 .portfolio .box-container .box img{
-    height:100%;
     width:100%;
+    height:20rem;
     object-fit:cover;
+    object-position:top;
+    display:block;
+    transition:transform .4s ease, filter .4s ease;
 }
 
 .portfolio .box-container .box:hover img{
-    transform:scale(1.08);
+    transform:scale(1.05);
+    filter:blur(3px) brightness(0.35);
 }
+
+.portfolio .box-container .box .hover-label{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:1.2rem;
+    opacity:0;
+    transition:opacity .35s ease;
+    z-index:3;
+    pointer-events:none;
+}
+
+.portfolio .box-container .box:hover .hover-label{
+    opacity:1;
+}
+
+.portfolio .box-container .box .hover-label .label-icon{
+    font-size:3rem;
+    color:var(--yellow);
+    transform:translateY(.8rem);
+    transition:transform .35s ease .05s;
+}
+
+.portfolio .box-container .box:hover .hover-label .label-icon{
+    transform:translateY(0);
+}
+
+.portfolio .box-container .box .hover-label span{
+    color:var(--yellow);
+    font-size:1.5rem;
+    font-weight:700;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    border:.15rem solid var(--yellow);
+    padding:.7rem 2.2rem;
+    border-radius:5rem;
+    background:rgba(249, 202, 36, 0.1);
+    transform:translateY(.8rem);
+    transition:transform .35s ease .1s, background .2s ease;
+    pointer-events:none;
+}
+
+.portfolio .box-container .box:hover .hover-label span{
+    transform:translateY(0);
+}
+
+.portfolio .box-container .box:hover .hover-label span:hover{
+    background:rgba(249, 202, 36, 0.22);
+}
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+
+.lightbox-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2rem;
+    opacity:0;
+    pointer-events:none;
+    transition:background .35s ease, opacity .35s ease;
+}
+
+.lightbox-overlay.active{
+    background:rgba(0,0,0,.92);
+    opacity:1;
+    pointer-events:all;
+}
+
+.lightbox-overlay .lightbox-img{
+    max-width:90vw;
+    max-height:88vh;
+    border-radius:.6rem;
+    border:.2rem solid rgba(249,202,36,.3);
+    box-shadow:0 2rem 6rem rgba(0,0,0,.8);
+    transform:scale(.85);
+    transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+    object-fit:contain;
+    display:block;
+}
+
+.lightbox-overlay.active .lightbox-img{
+    transform:scale(1);
+}
+
+.lightbox-close{
+    position:fixed;
+    top:2rem;
+    right:2.5rem;
+    font-size:3rem;
+    color:#fff;
+    cursor:pointer;
+    z-index:10000;
+    width:4.5rem;
+    height:4.5rem;
+    border-radius:50%;
+    background:rgba(249,202,36,.15);
+    border:.1rem solid rgba(249,202,36,.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .2s ease, transform .2s ease;
+    opacity:0;
+    pointer-events:none;
+}
+
+.lightbox-overlay.active ~ .lightbox-close,
+.lightbox-close.active{
+    opacity:1;
+    pointer-events:all;
+}
+
+.lightbox-close:hover{
+    background:var(--yellow);
+    color:#111;
+    transform:rotate(90deg);
+}
+
+/* ============================================
+   CONTACT
+   ============================================ */
 
 .contact .row{
     display:flex;
@@ -446,336 +930,193 @@ header .navbar ul li a:hover{
     z-index:1201;
 }
 
-/* skill */
-.skill-section{
-    padding:5rem 0 0;
-    margin:auto;
-    height:auto;
-    width:100%;
+/* ============================================
+   PROJECTS SECTION
+   ============================================ */
+
+#projects{
+    padding:3rem 5%;
+    min-height:100vh;
 }
 
-.skill{
-    text-align:center;
-    font-size:5rem;
-    font-weight:700;
-    color:rgba(255,255,255,0.8);
-    margin-bottom:2rem;
+.project-gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(30rem, 1fr));
+    gap:2rem;
+    padding:1rem 0;
 }
 
-.skill-bars{
-    padding:2.5rem;
-    width:min(100%, 100rem);
-    margin:0 auto;
-    background:rgb(20, 19, 13);
-    box-shadow:0 1.5rem 4rem rgba(255, 0, 0, 0.12);
-    border-radius:1rem;
-}
-
-.skill-bars .bar{
-    margin:2rem 0;
-}
-
-.skill-bars .bar:first-child{
-    margin-top:0;
-}
-
-.skill-bars .bar .info{
-    margin-bottom:.8rem;
-}
-
-.skill-bars .bar .info span{
-    font-weight:500;
-    font-size:1.7rem;
-    opacity:0;
-    color:rgba(194, 194, 194, 0.8);
-    animation:showText 0.5s 1s linear forwards;
-}
-
-@keyframes showText{
-    100%{
-        opacity:1;
-    }
-}
-
-.skill-bars .bar .progress-line{
-    height:1rem;
-    width:100%;
-    background:#f0f0f0;
+.project-card{
+    background:#1a1a1a;
+    border:.1rem solid #ffffff1a;
+    border-radius:.6rem;
+    overflow:hidden;
     position:relative;
-    transform:scaleX(0);
-    transform-origin:left;
-    border-radius:1rem;
-    box-shadow:inset 0 1px 1px rgba(0,0,0,0.05), 0 1px rgba(255,255,255,0.8);
-    animation:animate 1s cubic-bezier(1,0,0.5,1) forwards;
+    transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+    animation:expFadeUp .6s ease both;
 }
 
-@keyframes animate{
-    100%{
-        transform:scaleX(1);
-    }
+.project-card:nth-child(1){ animation-delay:.1s; }
+.project-card:nth-child(2){ animation-delay:.25s; }
+.project-card:nth-child(3){ animation-delay:.4s; }
+.project-card:nth-child(4){ animation-delay:.55s; }
+
+.project-card:hover{
+    border-color:var(--yellow);
+    transform:translateY(-.5rem);
+    box-shadow:0 1rem 3rem rgba(249, 202, 36, 0.1);
 }
 
-.bar .progress-line span{
+.project-card .img-wrap{
+    position:relative;
+    width:100%;
+    height:20rem;
+    overflow:hidden;
+}
+
+.project-card .img-wrap img{
+    width:100%;
     height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .4s ease, filter .4s ease;
+}
+
+.project-card:hover .img-wrap img{
+    transform:scale(1.06);
+    filter:blur(3px) brightness(0.4);
+}
+
+.project-card .img-wrap .overlay{
     position:absolute;
-    border-radius:1rem;
-    transform:scaleX(0);
-    transform-origin:left;
-    background:#6665ee;
-    animation:animate 1s 1s cubic-bezier(1,0,0.5,1) forwards;
-}
-
-.bar .progress-line.html span{
-    width:95%;
-}
-
-.bar .progress-line.css span{
-    width:85%;
-}
-
-.bar .progress-line.jquery span{
-    width:95%;
-}
-
-.bar .progress-line.python span{
-    width:95%;
-}
-
-.bar .progress-line.mysql span{
-    width:90%;
-}
-.bar .progress-line.django span{
-    width:90%;
-}
-.bar .progress-line.devops span{
-    width:75%;
-}
-.progress-line span::before{
-    position:absolute;
-    content:"";
-    top:-10px;
-    right:0;
-    height:0;
-    width:0;
-    border:7px solid transparent;
-    border-bottom-width:0;
-    border-right-width:0;
-    border-top-color:#000;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:1rem;
+    flex-wrap:wrap;
     opacity:0;
-    animation:showText2 0.5s 1.5s linear forwards;
+    transition:opacity .35s ease;
 }
 
-.progress-line span::after{
-    position:absolute;
-    top:-28px;
-    right:0;
-    font-weight:500;
-    background:#000;
+.project-card:hover .img-wrap .overlay{
+    opacity:1;
+}
+
+.project-card .img-wrap .overlay a{
+    display:inline-flex;
+    align-items:center;
+    gap:.6rem;
+    padding:.8rem 2rem;
+    font-size:1.4rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#111;
+    background:var(--yellow);
+    border-radius:5rem;
+    border:none;
+    transition:background .2s ease, transform .2s ease;
+    transform:translateY(1rem);
+    transition:opacity .35s ease .1s, transform .35s ease .1s, background .2s ease;
+    opacity:0;
+}
+
+.project-card:hover .img-wrap .overlay a{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.project-card .img-wrap .overlay a i{
+    font-size:1.3rem;
+}
+
+.project-card .img-wrap .overlay a:hover{
+    background:#fff;
+}
+
+.project-card .card-body{
+    padding:2rem 2.5rem 2.5rem;
+}
+
+.project-card .card-body h3{
+    font-size:1.9rem;
     color:#fff;
-    padding:1px 8px;
-    font-size:12px;
-    border-radius:3px;
-    opacity:0;
-    animation:showText2 0.5s 1.5s linear forwards;
+    line-height:1.4;
+    margin-bottom:.8rem;
+    font-weight:600;
 }
 
-@keyframes showText2{
-    100%{
-        opacity:1;
-    }
+.project-card .card-body p{
+    font-size:1.5rem;
+    line-height:1.8;
+    color:#aaa;
+    font-weight:300;
 }
 
-.progress-line.html span::after{
-    content:"95%";
-}
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
 
-.progress-line.css span::after{
-    content:"85%";
-}
-
-.progress-line.jquery span::after{
-    content:"95%";
-}
-
-.progress-line.python span::after{
-    content:"95%";
-}
-
-.progress-line.mysql span::after{
-    content:"90%";
-}
-.progress-line.django span::after{
-    content:"90%";
-}
-.progress-line.devops span::after{
-    content:"75%";
-}
-
-/* media queries */
 @media (max-width:1200px){
-    html{
-        font-size:58%;
-    }
-
-    .home{
-        padding:0 6%;
-    }
-
-    .skill-bars{
-        width:100%;
-    }
+    html{ font-size:58%; }
+    .home{ padding:0 6%; }
+    .skill-bars{ width:100%; }
 }
 
 @media (max-width:991px){
-    header{
-        left:-120%;
-    }
-
-    #menu{
-        display:block;
-    }
-
-    header.toggle{
-        left:0%;
-        width:32rem;
-    }
-
-    body{
-        padding:0;
-    }
-
-    .home{
-        padding:0 5%;
-    }
-
-    .home h3{
-        padding-top:10rem;
-    }
-
-    .skill-section{
-        padding-top:4rem;
-    }
+    header{ left:-120%; }
+    #menu{ display:block; }
+    header.toggle{ left:0%; width:32rem; }
+    body{ padding:0; }
+    .home{ padding:0 5%; }
+    .home h3{ padding-top:10rem; }
+    .skill-section{ padding-top:4rem; }
+    .exp .box-container,
+    .project-gallery{ grid-template-columns:1fr; }
 }
 
 @media (max-width:768px){
-    html{
-        font-size:53%;
-    }
-
-    section{
-        padding:2.5rem 4%;
-    }
-
-    .home h1{
-        font-size:4.2rem;
-    }
-
-    .heading{
-        font-size:3.4rem;
-    }
-
+    html{ font-size:53%; }
+    section{ padding:2.5rem 4%; }
+    .home h1{ font-size:4.2rem; }
+    .heading{ font-size:3.4rem; }
     .about .row .info,
     .about .row .counter,
     .contact .row .content,
-    .contact .row form{
-        flex:1 1 100%;
-    }
-
-    .education .box-container .box{
-        flex:1 1 100%;
-        width:100%;
-        margin:2rem 0;
-    }
-
-    .skill{
-        font-size:4rem;
-    }
-
-    .skill-bars{
-        padding:2rem 1.5rem;
-    }
+    .contact .row form{ flex:1 1 100%; }
+    .education .box-container .box{ flex:1 1 100%; width:100%; margin:2rem 0; }
+    .skill{ font-size:4rem; }
+    .skill-bars{ padding:2rem 1.5rem; }
+    .exp .box-container .box,
+    .project-card{ padding:2.5rem 2rem; }
 }
 
 @media (max-width:520px){
-    html{
-        font-size:50%;
-    }
-
-    #menu{
-        top:1.5rem;
-        right:1.5rem;
-    }
-
-    header{
-        width:100vw;
-    }
-
-    header.toggle{
-        width:100vw;
-    }
-
-    .heading{
-        margin:0 auto 2.5rem;
-        font-size:3rem;
-    }
-
-    .home{
-        padding:0 4%;
-    }
-
-    .home h1{
-        font-size:3.6rem;
-    }
-
-    .home h1 span{
-        white-space:normal;
-        border-right:none;
-        animation:none;
-        display:inline;
-    }
-
-    .home p{
-        font-size:1.8rem;
-    }
-
-    .about .row .counter{
-        gap:1rem;
-    }
-
-    .about .row .counter .box{
-        width:100%;
-    }
-
-    .portfolio .box-container{
-        grid-template-columns:1fr;
-    }
-
-    .contact .row form{
-        padding:1rem 0;
-    }
-
-    .skill{
-        font-size:3.4rem;
-    }
-
+    html{ font-size:50%; }
+    #menu{ top:1.5rem; right:1.5rem; }
+    header{ width:100vw; }
+    header.toggle{ width:100vw; }
+    .heading{ margin:0 auto 2.5rem; font-size:3rem; }
+    .home{ padding:0 4%; }
+    .home h1{ font-size:3.6rem; }
+    .home h1 span{ white-space:normal; border-right:none; animation:none; display:inline; }
+    .home p{ font-size:1.8rem; }
+    .about .row .counter{ gap:1rem; }
+    .about .row .counter .box{ width:100%; }
+    .portfolio .box-container{ grid-template-columns:1fr; }
+    .contact .row form{ padding:1rem 0; }
+    .skill{ font-size:3.4rem; }
     .progress-line span::before,
-    .progress-line span::after{
-        display:none;
-    }
+    .progress-line span::after{ display:none; }
+    .exp .box-container .box h3,
+    .project-card h3{ font-size:1.7rem; }
+    .exp .box-container .box p,
+    .project-card p{ font-size:1.4rem; }
 }
 
 @media (max-width:360px){
-    html{
-        font-size:46%;
-    }
-
-    .btn{
-        width:100%;
-        text-align:center;
-    }
-
-    header .user img{
-        width:14rem;
-        height:14rem;
-    }
+    html{ font-size:46%; }
+    .btn{ width:100%; text-align:center; }
+    header .user img{ width:14rem; height:14rem; }
 }
